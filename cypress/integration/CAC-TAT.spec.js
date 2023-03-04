@@ -86,5 +86,24 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         .select(1)
         .should('have.value', 'blog')
     })
+
+    it('marca o tipo de atendimento "Feedback"', function(){
+        // cy.get('input[type="radio"]')             // esse get traz todos os elementos do radio
+        //   .check('feedback')
+        //   .should('have.value', 'feedback')
+
+        cy.get('input[type="radio"][value="feedback"]')
+        .check()
+        .should('have.value', 'feedback')
+    })
+
+    it.only('marca cada tipo de atentimento', function(){
+        cy.get('input[type="radio"]')
+          .should('have.length', 3)
+          .each(function($radio){
+            cy.wrap($radio).check()
+            cy.wrap($radio).should('be.checked')
+          })
+    })
   })
   
